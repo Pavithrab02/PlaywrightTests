@@ -12,7 +12,7 @@ test.describe('Login', () => {
     // Click the Log In button to open the login modal
     await page.click('#login2');
 
-    await loginPage.setUserName('tgbng');
+    await loginPage.setUserName('tgsbnglore');
     await loginPage.setPassword('12345');
     await loginPage.clickLogin();
 

@@ -12,7 +12,7 @@ test.describe('Cart', () => {
       month: '12',
       year: '2025',
     },
-    // Add more test data objects as needed
+   
   ];
 
   for (const input of cartData) {
@@ -21,13 +21,10 @@ test.describe('Cart', () => {
       await page.context().clearCookies();
       await page.setViewportSize({ width: 1280, height: 720 });
 
-      // HomePage actions
-      // If you have a HomePage class, use it. Otherwise, click directly:
-      // const homePage = new HomePage(page);
-      // await homePage.clickCart();
+      
       await page.click('#cartur');
 
-      // CartPage actions
+      
       const cartPage = new CartPage(page);
       await cartPage.clickPlaceOrder();
       await cartPage.setName(input.name);
@@ -38,9 +35,9 @@ test.describe('Cart', () => {
       await cartPage.setYear(input.year);
       await cartPage.clickPurchase();
 
-      // Screenshot (optional)
+     
       await page.screenshot({ path: `screenshots/place_order_from_cart_${input.name}.png` });
-      // Email sending is not implemented here; use Node.js email libraries if needed
+     
     });
   }
 });

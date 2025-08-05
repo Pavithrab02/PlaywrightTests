@@ -1,28 +1,29 @@
 import { test, expect } from '@playwright/test';
 import HomePage from '../pages/HomePage';
 import AccountRegistrationPage from '../pages/AccountRegistrationPage';
+import LoginPage from '../pages/LoginPage';
 
-test('Verify account registration', async ({ page }) => {
-  // Setup
-  await page.goto('https://www.demoblaze.com/');
-  await page.context().clearCookies();
-  await page.setViewportSize({ width: 1280, height: 720 });
+test.describe.serial('User registration and login flow', () => {
+  const username = 'tgsbnglore';
+  const password = '12345';
 
-  // Page Object Usage
-  const homePage = new HomePage(page);
-  await homePage.clickSignIn();
+  test('Verify account registration', async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    await page.context().clearCookies();
+    await page.setViewportSize({ width: 1280, height: 720 });
 
-  const regPage = new AccountRegistrationPage(page);
-  await regPage.setUserName('tgsbng');
-  await regPage.setPassword('12345');
-  await regPage.clickSignIn();
+    const homePage = new HomePage(page);
+    await homePage.clickSignIn();
 
-  // Assertion (optional)
-  page.once('dialog', async dialog => {
-    console.log('Dialog message:', dialog.message());
-    await dialog.accept();
+    const regPage = new AccountRegistrationPage(page);
+    await regPage.setUserName('tgsbnglore');
+    await regPage.setPassword('12345');
+    await regPage.clickSignIn();
+
+    page.once('dialog', async dialog => {
+      console.log('Dialog message:', dialog.message());
+      await dialog.accept();
+    });
+    console.log('Page title:', await page.title());
   });
-  console.log('Page title:', await page.title());
-  // Optionally, add Playwright assertions here
-  // await expect(page).toHaveTitle(/expected title/i);
 });
