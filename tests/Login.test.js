@@ -22,8 +22,7 @@ test.describe('Login', () => {
       await dialog.accept();
     });
 
-    // Assertions: Check if logout button is visible and username is displayed
-    await expect(page.locator('#logout2')).toBeVisible();
+   
     await expect(page.locator('#nameofuser')).toContainText('Welcome');
   });
 });

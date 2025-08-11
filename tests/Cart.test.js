@@ -35,7 +35,15 @@ test.describe('Cart', () => {
       await cartPage.setYear(input.year);
       await cartPage.clickPurchase();
 
-     
+      // Handle confirmation dialog after purchase
+      page.once('dialog', async dialog => {
+        console.log('Order confirmation:', dialog.message());
+        await dialog.accept();
+      });
+
+      // Optionally, assert a confirmation modal or message
+      // await expect(page.locator('selector-for-confirmation')).toBeVisible();
+
       await page.screenshot({ path: `screenshots/place_order_from_cart_${input.name}.png` });
      
     });
